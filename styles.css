@@ -43,7 +43,7 @@ header {
   align-items: center;
   justify-content: space-between;
   padding: 0 40px;
-  position: sticky;
+  position: relative;
   top: 0;
   z-index: 900;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
@@ -554,7 +554,8 @@ footer {
 
   .coffee-widget {
     position: fixed;
-    top: 160px;
+    top: auto;
+    bottom: 20px;
     right: 20px;
     margin: 0;
     width: 210px;
