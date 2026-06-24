@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Play KIKI HUB parametric 3D tools directly in your browser. Real-time procedural product design for 3D printing.">
+  <title>Interactive Player - KIKI HUB</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Specific styles for the WebGL player page */
+    .player-container {
+      max-width: 1680px;
+      margin: 40px auto;
+      padding: 0 30px;
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      gap: 30px;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .player-sidebar {
+      width: 320px;
+      flex-shrink: 0;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .player-main-area {
+      flex: 1;
+      max-width: 1280px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .sidebar-header {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 20px;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: var(--text-white);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+      transition: color var(--transition-speed), border-color var(--transition-speed), transform var(--transition-speed);
+      border: 1px solid var(--border-color);
+      padding: 12px 20px;
+      border-radius: 8px;
+      background-color: rgba(255, 255, 255, 0.02);
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .back-btn:hover {
+      color: var(--accent-yellow);
+      border-color: var(--accent-yellow);
+      transform: translateX(-4px);
+    }
+
+    .app-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 20px;
+    }
+
+    .section-title-mini {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--primary-red);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .app-meta h3 {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--text-white);
+      letter-spacing: 0.5px;
+      line-height: 1.2;
+    }
+
+    .app-meta p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .tips-card {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .tips-card-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--accent-yellow);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .tips-vertical-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .tip-vertical-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .tip-vertical-item .tip-icon {
+      width: 36px;
+      height: 36px;
+      background-color: rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .tip-details {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .tip-details strong {
+      font-size: 0.85rem;
+      color: var(--text-white);
+      font-weight: 700;
+    }
+
+    .tip-details span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 20px;
+    }
+
+    .toolbar-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background-color: var(--primary-red);
+      color: var(--text-white);
+      border: 1px solid var(--primary-red);
+      border-radius: 8px;
+      padding: 12px 20px;
+      font-family: var(--font-family);
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background-color var(--transition-speed), border-color var(--transition-speed), transform var(--transition-speed);
+      width: 100%;
+    }
+
+    .toolbar-btn:hover {
+      background-color: var(--primary-red-hover);
+      border-color: var(--primary-red-hover);
+      transform: translateY(-2px);
+    }
+
+    /* SVG Icons for UI */
+    .icon-svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .game-window-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 1280px;
+      aspect-ratio: 16 / 9;
+      background-color: #0d0d0d;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 2px solid var(--border-color);
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #unity-canvas {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+      background-color: #141414;
+    }
+
+    /* Premium Loading Overlay */
+    .loading-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(20, 20, 20, 0.96);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+      padding: 40px;
+      box-sizing: border-box;
+    }
+
+    .loading-overlay.fade-out {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loading-title {
+      font-size: 2.2rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      margin-bottom: 24px;
+      color: var(--text-white);
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .spinner {
+      width: 60px;
+      height: 60px;
+      border: 5px solid rgba(198, 40, 40, 0.1);
+      border-top: 5px solid var(--primary-red);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 30px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .progress-container {
+      width: 100%;
+      max-width: 450px;
+      height: 8px;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background-color: var(--primary-red);
+      border-radius: 4px;
+      transition: width 0.1s ease;
+      box-shadow: 0 0 10px var(--primary-red-hover);
+    }
+
+    .progress-text {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+      margin-bottom: 40px;
+    }
+
+    /* Control Tips Layout inside loading screen */
+    .tips-layout {
+      display: flex;
+      gap: 30px;
+      max-width: 600px;
+      justify-content: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 30px;
+    }
+
+    .tip-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 8px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .tip-icon {
+      width: 48px;
+      height: 48px;
+      background-color: rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-yellow);
+      font-size: 1.2rem;
+    }
+
+    .tip-box strong {
+      color: var(--text-white);
+      font-size: 0.9rem;
+    }
+
+    /* Error Popup style */
+    .error-popup {
+      background-color: rgba(198, 40, 40, 0.1);
+      border: 1px solid var(--primary-red);
+      color: #ff8a80;
+      padding: 15px 25px;
+      border-radius: 12px;
+      font-weight: 600;
+      text-align: center;
+      display: none;
+    }
+
+    @media (max-width: 1200px) {
+      .player-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 0 20px;
+      }
+      
+      .player-sidebar {
+        width: 100%;
+        max-width: 1280px;
+        order: 2; /* Sidebar goes under canvas on smaller screens */
+      }
+      
+      .player-main-area {
+        order: 1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .loading-title {
+        font-size: 1.6rem;
+      }
+      .tips-layout {
+        flex-direction: column;
+        gap: 15px;
+        padding-top: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Buy Me A Coffee Fixed Widget -->
+  <div class="coffee-widget">
+    <a href="https://buymeacoffee.com/kikihub" target="_blank" class="coffee-widget-link">
+      <div class="coffee-heart">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+      </div>
+      <div class="coffee-text">If you like this product..</div>
+      <img src="Images/buymeacoffee.png" alt="Buy Me A Coffee" class="coffee-btn-img">
+    </a>
+  </div>
+
+  <!-- Header Section -->
+  <header>
+    <div class="header-container">
+      <div class="logo-area">
+        <a href="index.html">
+          <img src="Images/logo.png" alt="KIKI HUB Logo">
+        </a>
+      </div>
+      <nav>
+        <a href="index.html">HOME</a>
+        <a href="index.html#feature">FEATURE</a>
+        <a href="product.html" class="active">PRODUCT</a>
+        <a href="about.html">ABOUT</a>
+        <a href="contact.html">CONTACT</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Interactive Player Section -->
+  <main class="player-container">
+    <!-- Sidebar Panel (Left) -->
+    <aside class="player-sidebar">
+      <div class="sidebar-header">
+        <a href="product.html" class="back-btn">
+          <svg class="icon-svg" viewBox="0 0 24 24" style="transform: rotate(180deg);">
+            <path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42 5.43 5.43H5v2z"/>
+          </svg>
+          BACK TO PRODUCTS
+        </a>
+      </div>
+
+      <div class="app-meta">
+        <div class="section-title-mini" id="app-display-title">Dynamic Player</div>
+        <h3 id="app-meta-title">KIKI BOX</h3>
+        <p>Unity 6 WebGL Procedural 3D Mesh Engine - Offline Mode</p>
+      </div>
+
+      <div class="tips-card">
+        <div class="tips-card-title">HOW TO CONTROL</div>
+        <div class="tips-vertical-list">
+          <div class="tip-vertical-item">
+            <div class="tip-icon">🖱️</div>
+            <div class="tip-details">
+              <strong>Orbit camera</strong>
+              <span>Right-Click + Drag mouse</span>
+            </div>
+          </div>
+          <div class="tip-vertical-item">
+            <div class="tip-icon">🖐️</div>
+            <div class="tip-details">
+              <strong>Pan camera</strong>
+              <span>Middle-Click + Drag mouse</span>
+            </div>
+          </div>
+          <div class="tip-vertical-item">
+            <div class="tip-icon">🔍</div>
+            <div class="tip-details">
+              <strong>Zoom Camera</strong>
+              <span>Scroll mouse wheel</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <button class="toolbar-btn" id="fullscreen-btn">
+          <svg class="icon-svg" viewBox="0 0 24 24">
+            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+          </svg>
+          FULLSCREEN
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Game Area (Right) -->
+    <div class="player-main-area">
+      <!-- Error container -->
+      <div id="error-box" class="error-popup"></div>
+
+      <!-- Game Player Canvas wrapper -->
+      <div class="game-window-wrapper" id="webgl-container">
+        
+        <!-- Custom Loading Screen -->
+        <div class="loading-overlay" id="loading-overlay">
+          <div class="loading-title" id="loading-app-name">LOADING KIKI BOX...</div>
+          <div class="spinner"></div>
+          <div class="progress-container">
+            <div class="progress-bar" id="progress-bar-fill"></div>
+          </div>
+          <div class="progress-text" id="progress-percent">Loading resources: 0%</div>
+          
+          <!-- Controls Helper Info inside loading overlay -->
+          <div class="tips-layout">
+            <div class="tip-box">
+              <div class="tip-icon">🖱️</div>
+              <strong>Orbit</strong>
+              <span>Right-Click + Drag</span>
+            </div>
+            <div class="tip-box">
+              <div class="tip-icon">🖐️</div>
+              <strong>Pan</strong>
+              <span>Middle-Click + Drag</span>
+            </div>
+            <div class="tip-box">
+              <div class="tip-icon">🔍</div>
+              <strong>Zoom</strong>
+              <span>Scroll Wheel</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Unity canvas resized to 1280x720 -->
+        <canvas id="unity-canvas" width="1280" height="720"></canvas>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="footer-text">
+      copyright 2026 KIKI Co. Ltd
+    </div>
+  </footer>
+
+  <!-- Unity WebGL Script Loader Logic -->
+  <script src="play.js"></script>
+</body>
+</html>
