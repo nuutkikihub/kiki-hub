@@ -512,18 +512,18 @@ h2.section-title {
 
 /* Footer Section */
 footer {
-  background-color: var(--primary-red);
-  height: 100px;
+  background-color: var(--bg-dark);
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+  border-top: 1px solid var(--border-color);
 }
 
 .footer-text {
-  color: var(--text-white);
-  font-size: 1.1rem;
-  font-weight: 600;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 500;
   letter-spacing: 0.5px;
   text-align: center;
 }
