@@ -20,17 +20,20 @@
       justify-content: center;
     }
 
+
     .player-sidebar {
       width: 320px;
+      height: 720px;
+      box-sizing: border-box;
       flex-shrink: 0;
-      background-color: var(--bg-card);
+      background-color: #1C1C22;
       border: 1px solid var(--border-color);
       border-radius: 20px;
-      padding: 24px;
+      padding: 20px;
       box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 16px;
     }
 
     .player-main-area {
@@ -43,8 +46,7 @@
     }
 
     .sidebar-header {
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      padding-bottom: 20px;
+      /* Removed divider and padding to save space */
     }
 
     .back-btn {
@@ -59,7 +61,7 @@
       letter-spacing: 0.5px;
       transition: color var(--transition-speed), border-color var(--transition-speed), transform var(--transition-speed);
       border: 1px solid var(--border-color);
-      padding: 12px 20px;
+      padding: 10px 16px;
       border-radius: 8px;
       background-color: rgba(255, 255, 255, 0.02);
       width: 100%;
@@ -75,9 +77,8 @@
     .app-meta {
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      padding-bottom: 20px;
+      gap: 8px;
+      /* Removed divider to match request */
     }
 
     .section-title-mini {
@@ -89,7 +90,7 @@
     }
 
     .app-meta h3 {
-      font-size: 1.8rem;
+      font-size: 1.45rem;
       font-weight: 900;
       color: var(--text-white);
       letter-spacing: 0.5px;
@@ -97,19 +98,20 @@
     }
 
     .app-meta p {
-      font-size: 0.9rem;
+      font-size: 0.82rem;
       color: var(--text-muted);
-      line-height: 1.6;
+      line-height: 1.45;
+      margin: 0;
     }
 
     .tips-card {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 12px;
     }
 
     .tips-card-title {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 800;
       color: var(--accent-yellow);
       letter-spacing: 1px;
@@ -119,49 +121,48 @@
     .tips-vertical-list {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 10px;
     }
 
     .tip-vertical-item {
       display: flex;
       align-items: flex-start;
-      gap: 12px;
+      gap: 8px;
     }
 
     .tip-vertical-item .tip-icon {
-      width: 36px;
-      height: 36px;
+      width: 30px;
+      height: 30px;
       background-color: rgba(255, 255, 255, 0.03);
       border-radius: 8px;
       border: 1px solid rgba(255, 255, 255, 0.05);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1rem;
+      font-size: 0.9rem;
       flex-shrink: 0;
     }
 
     .tip-details {
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 0px;
     }
 
     .tip-details strong {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: var(--text-white);
       font-weight: 700;
     }
 
     .tip-details span {
-      font-size: 0.8rem;
+      font-size: 0.72rem;
       color: var(--text-muted);
     }
 
     .sidebar-footer {
       margin-top: auto;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding-top: 20px;
+      /* Removed top divider border */
     }
 
     .toolbar-btn {
@@ -173,10 +174,10 @@
       color: var(--text-white);
       border: 1px solid var(--primary-red);
       border-radius: 8px;
-      padding: 12px 20px;
+      padding: 10px 16px;
       font-family: var(--font-family);
       font-weight: 700;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       cursor: pointer;
       transition: background-color var(--transition-speed), border-color var(--transition-speed), transform var(--transition-speed);
       width: 100%;
@@ -197,9 +198,8 @@
 
     .game-window-wrapper {
       position: relative;
-      width: 100%;
-      max-width: 1280px;
-      aspect-ratio: 16 / 9;
+      width: 1280px;
+      height: 720px;
       background-color: #0d0d0d;
       border-radius: 20px;
       overflow: hidden;
@@ -353,11 +353,19 @@
       .player-sidebar {
         width: 100%;
         max-width: 1280px;
+        height: auto;
         order: 2; /* Sidebar goes under canvas on smaller screens */
       }
       
       .player-main-area {
         order: 1;
+        width: 100%;
+      }
+
+      .game-window-wrapper {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9;
       }
     }
 
@@ -420,7 +428,6 @@
       </div>
 
       <div class="app-meta">
-        <div class="section-title-mini" id="app-display-title">Dynamic Player</div>
         <h3 id="app-meta-title">KIKI BOX</h3>
         <p>Unity 6 WebGL Procedural 3D Mesh Engine - Offline Mode</p>
       </div>

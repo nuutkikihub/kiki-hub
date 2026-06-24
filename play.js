@@ -10,31 +10,31 @@ document.addEventListener('DOMContentLoaded', () => {
       title: "KIKI BOX",
       prefix: "kiki-box",
       buildDir: "WebGL/kiki-box/Build",
-      description: "WebGL Procedural Box Generator - Configurable mechanical tolerance, snap-fit slots, and custom dimensions."
+      description: "Flawless Snap-Fit, Zero Friction Out of the Box. Say goodbye to parts that are too tight to assemble or too loose to hold. KIKI HUB's advanced procedural geometry core automatically calculates the perfect mechanical tolerance required for structural connections. No matter how much you scale or resize your models, every joint, interlocking latch, and puzzle box edge will snap together seamlessly and securely on your first print minutes."
     },
     "kiki-joint": {
       title: "KIKI JOINT",
       prefix: "kiki-joint",
       buildDir: "WebGL/kiki-joint/Build",
-      description: "WebGL Procedural Joint Generator - Parametric structural connections, interlocking joints, and custom tolerance."
+      description: "Flawless Snap-Fit, Zero Friction Out of the Box. Say goodbye to parts that are too tight to assemble or too loose to hold. KIKI HUB's advanced procedural geometry core automatically calculates the perfect mechanical tolerance required for structural connections. No matter how much you scale or resize your models, every joint, interlocking latch, and puzzle box edge will snap together seamlessly and securely on your first print minutes."
     },
     "kiki-frame": {
       title: "KIKI FRAME",
       prefix: "kiki-frame",
       buildDir: "WebGL/kiki-frame/Build",
-      description: "WebGL Procedural Frame Generator - Design custom brackets, corner joints, and structural framing panels."
+      description: "Flawless Snap-Fit, Zero Friction Out of the Box. Say goodbye to parts that are too tight to assemble or too loose to hold. KIKI HUB's advanced procedural geometry core automatically calculates the perfect mechanical tolerance required for structural connections. No matter how much you scale or resize your models, every joint, interlocking latch, and puzzle box edge will snap together seamlessly and securely on your first print minutes."
     },
     "kiki-lattice": {
       title: "KIKI LATTICE",
       prefix: "kiki-lattice",
       buildDir: "WebGL/kiki-lattice/Build",
-      description: "WebGL Procedural Lattice Generator - Organic mesh structure creator for lightweight and artistic 3D prints."
+      description: "Flawless Snap-Fit, Zero Friction Out of the Box. Say goodbye to parts that are too tight to assemble or too loose to hold. KIKI HUB's advanced procedural geometry core automatically calculates the perfect mechanical tolerance required for structural connections. No matter how much you scale or resize your models, every joint, interlocking latch, and puzzle box edge will snap together seamlessly and securely on your first print minutes."
     },
     "kiki-vase": {
       title: "KIKI VASE",
       prefix: "kiki-vase",
       buildDir: "WebGL/kiki-vase/Build",
-      description: "WebGL Procedural Vase Generator - Fibonacci spirals, wave geometry, and custom vase mode templates."
+      description: "Flawless Snap-Fit, Zero Friction Out of the Box. Say goodbye to parts that are too tight to assemble or too loose to hold. KIKI HUB's advanced procedural geometry core automatically calculates the perfect mechanical tolerance required for structural connections. No matter how much you scale or resize your models, every joint, interlocking latch, and puzzle box edge will snap together seamlessly and securely on your first print minutes."
     }
   };
 

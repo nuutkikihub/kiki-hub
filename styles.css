@@ -544,8 +544,7 @@ footer {
   text-decoration: none;
   letter-spacing: 1px;
   border: 2px solid var(--primary-red);
-  box-shadow: 0 4px 15px rgba(198, 40, 40, 0.2);
-  transition: background-color var(--transition-speed), border-color var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed);
+  transition: background-color var(--transition-speed), border-color var(--transition-speed), transform var(--transition-speed);
   cursor: pointer;
 }
 
@@ -553,7 +552,6 @@ footer {
   background-color: var(--primary-red-hover);
   border-color: var(--primary-red-hover);
   transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(229, 57, 53, 0.4);
 }
 
 /* Mobile Responsive */
