@@ -10,31 +10,31 @@ document.addEventListener('DOMContentLoaded', () => {
       title: "KIKI BOX",
       prefix: "kiki-box",
       buildDir: "WebGL/kiki-box/Build",
-      description: "Flawless Snap-Fit, Zero Friction Out of the Box. Say goodbye to parts that are too tight to assemble or too loose to hold. KIKI HUB's advanced procedural geometry core automatically calculates the perfect mechanical tolerance required for structural connections. No matter how much you scale or resize your models, every joint, interlocking latch, and puzzle box edge will snap together seamlessly and securely on your first print minutes."
+      description: "Easily create custom-sized boxes with custom-engraved name lids. Flawless Snap-Fit out of the box with a built-in 0.3mm tolerance (fully adjustable). Sliders for rapid dimension adjustment—get your perfect desktop organizer setup in under 5 minutes!"
     },
     "kiki-joint": {
       title: "KIKI JOINT",
       prefix: "kiki-joint",
       buildDir: "WebGL/kiki-joint/Build",
-      description: "Flawless Snap-Fit, Zero Friction Out of the Box. Say goodbye to parts that are too tight to assemble or too loose to hold. KIKI HUB's advanced procedural geometry core automatically calculates the perfect mechanical tolerance required for structural connections. No matter how much you scale or resize your models, every joint, interlocking latch, and puzzle box edge will snap together seamlessly and securely on your first print minutes."
+      description: "The smart structural connector engineered to fit any tube or enclosure. Just measure the diameter of your part, input the digits into KIKI Joint, and print. Features adjustable angles for select parts and allows you to save up to 10 custom connector profiles!"
     },
     "kiki-frame": {
       title: "KIKI FRAME",
       prefix: "kiki-frame",
       buildDir: "WebGL/kiki-frame/Build",
-      description: "Flawless Snap-Fit, Zero Friction Out of the Box. Say goodbye to parts that are too tight to assemble or too loose to hold. KIKI HUB's advanced procedural geometry core automatically calculates the perfect mechanical tolerance required for structural connections. No matter how much you scale or resize your models, every joint, interlocking latch, and puzzle box edge will snap together seamlessly and securely on your first print minutes."
+      description: "Parametric picture frames featuring automatically calculated structural kickstands. Simply adjust the display angle, and the support leg automatically scales to reinforce the back. Versatile design for photo displays, shadow boxes, mini figurine shelves, or custom phone docks!"
     },
     "kiki-lattice": {
       title: "KIKI LATTICE",
       prefix: "kiki-lattice",
       buildDir: "WebGL/kiki-lattice/Build",
-      description: "Flawless Snap-Fit, Zero Friction Out of the Box. Say goodbye to parts that are too tight to assemble or too loose to hold. KIKI HUB's advanced procedural geometry core automatically calculates the perfect mechanical tolerance required for structural connections. No matter how much you scale or resize your models, every joint, interlocking latch, and puzzle box edge will snap together seamlessly and securely on your first print minutes."
+      description: "Parametric mesh baskets with 10 distinct architectural weave patterns. Effortlessly generate complex polygonal structures and intricate mesh geometries in just 5 minutes. Unlimited size customization to suit any organization or storage need!"
     },
     "kiki-vase": {
       title: "KIKI VASE",
       prefix: "kiki-vase",
       buildDir: "WebGL/kiki-vase/Build",
-      description: "Flawless Snap-Fit, Zero Friction Out of the Box. Say goodbye to parts that are too tight to assemble or too loose to hold. KIKI HUB's advanced procedural geometry core automatically calculates the perfect mechanical tolerance required for structural connections. No matter how much you scale or resize your models, every joint, interlocking latch, and puzzle box edge will snap together seamlessly and securely on your first print minutes."
+      description: "Modern classic vases featuring high-end aesthetic modifiers. Toggle patterns, add customized twist geometries, or morph shapes from organic curves to low-poly aesthetics. Fully scalable parameters—try creating your first custom twisted-square vase right now!"
     }
   };
 
