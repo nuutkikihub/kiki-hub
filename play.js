@@ -79,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Real Unity Loader Logic ---
   function loadRealUnityBuild() {
+    const ext = config.ext || "unityweb";
     const loaderScriptUrl = `${config.buildDir}/${config.prefix}.loader.js`;
 
     const script = document.createElement('script');
@@ -86,9 +87,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     script.onload = () => {
       const unityConfig = {
-        dataUrl: `${config.buildDir}/${config.prefix}.data.unityweb`,
-        frameworkUrl: `${config.buildDir}/${config.prefix}.framework.js.unityweb`,
-        codeUrl: `${config.buildDir}/${config.prefix}.wasm.unityweb`,
+        dataUrl: `${config.buildDir}/${config.prefix}.data.${ext}`,
+        frameworkUrl: `${config.buildDir}/${config.prefix}.framework.js.${ext}`,
+        codeUrl: `${config.buildDir}/${config.prefix}.wasm.${ext}`,
         streamingAssetsUrl: "StreamingAssets",
         companyName: "KIKI PRODUCTION",
         productName: config.title,
@@ -264,17 +265,65 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 5. Fullscreen Event Binding
+  const container = document.getElementById('webgl-container');
+  const closeFullscreenBtn = document.getElementById('close-fullscreen-btn');
+
+  function enterPseudoFullscreen() {
+    if (container) {
+      container.classList.add('pseudo-fullscreen');
+    }
+    if (closeFullscreenBtn) {
+      closeFullscreenBtn.style.display = 'inline-flex';
+    }
+    document.body.style.overflow = 'hidden'; // Lock background scroll
+  }
+
+  function exitPseudoFullscreen() {
+    if (container) {
+      container.classList.remove('pseudo-fullscreen');
+    }
+    if (closeFullscreenBtn) {
+      closeFullscreenBtn.style.display = 'none';
+    }
+    document.body.style.overflow = ''; // Unlock background scroll
+  }
+
   if (fullscreenBtn) {
     fullscreenBtn.addEventListener('click', () => {
-      if (window.unityInstance) {
-        window.unityInstance.SetFullscreen(1);
-      } else if (canvas.requestFullscreen) {
-        canvas.requestFullscreen();
-      } else if (canvas.webkitRequestFullscreen) {
-        canvas.webkitRequestFullscreen(); // Safari support
-      } else if (canvas.msRequestFullscreen) {
-        canvas.msRequestFullscreen(); // IE/Edge support
+      // Check if native fullscreen is supported on the canvas
+      const supportsNative = !!(
+        canvas.requestFullscreen ||
+        canvas.webkitRequestFullscreen ||
+        canvas.msRequestFullscreen
+      );
+
+      if (supportsNative) {
+        if (window.unityInstance) {
+          window.unityInstance.SetFullscreen(1);
+        } else if (canvas.requestFullscreen) {
+          canvas.requestFullscreen();
+        } else if (canvas.webkitRequestFullscreen) {
+          canvas.webkitRequestFullscreen();
+        } else if (canvas.msRequestFullscreen) {
+          canvas.msRequestFullscreen();
+        }
+      } else {
+        // Fallback to Pseudo Fullscreen for iOS/iPhone
+        enterPseudoFullscreen();
       }
     });
   }
+
+  if (closeFullscreenBtn) {
+    closeFullscreenBtn.addEventListener('click', () => {
+      exitPseudoFullscreen();
+    });
+  }
+
+  // Handle ESC key to exit pseudo fullscreen
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && container && container.classList.contains('pseudo-fullscreen')) {
+      exitPseudoFullscreen();
+    }
+  });
 });

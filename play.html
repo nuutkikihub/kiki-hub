@@ -381,6 +381,49 @@
         padding-top: 15px;
       }
     }
+
+    /* Pseudo Fullscreen for iOS/iPhone fallback */
+    .game-window-wrapper.pseudo-fullscreen {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      max-width: none !important;
+      max-height: none !important;
+      border-radius: 0 !important;
+      border: none !important;
+      z-index: 99999 !important;
+      aspect-ratio: auto !important;
+      box-shadow: none !important;
+    }
+
+    .close-fullscreen-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 100000;
+      background-color: var(--primary-red);
+      color: #fff;
+      border: 2px solid #fff;
+      border-radius: 30px;
+      padding: 10px 20px;
+      font-family: var(--font-family);
+      font-weight: 800;
+      font-size: 0.9rem;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      transition: background-color var(--transition-speed), transform var(--transition-speed);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .close-fullscreen-btn:hover {
+      background-color: var(--primary-red-hover);
+      transform: scale(1.05);
+    }
   </style>
 </head>
 <body>
@@ -408,8 +451,7 @@
       </div>
       <nav>
         <a href="index.html">HOME</a>
-        <a href="index.html#feature">FEATURE</a>
-        <a href="product.html" class="active">PRODUCT</a>
+        <a href="product.html" class="active">CREATE IN 3D</a>
         <a href="about.html">ABOUT</a>
         <a href="contact.html">CONTACT</a>
       </nav>
@@ -478,6 +520,10 @@
 
       <!-- Game Player Canvas wrapper -->
       <div class="game-window-wrapper" id="webgl-container">
+        <!-- Floating Close Button for mobile pseudo-fullscreen -->
+        <button id="close-fullscreen-btn" class="close-fullscreen-btn" style="display: none;">
+          ✕ Close Fullscreen
+        </button>
         
         <!-- Custom Loading Screen -->
         <div class="loading-overlay" id="loading-overlay">

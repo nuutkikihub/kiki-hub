@@ -6,6 +6,157 @@
   <meta name="description" content="Download parametric products by KIKI HUB. High fidelity 3D models including KIKI BOX, JOINT, FRAME, LATTICE, and VASE.">
   <title>Products - KIKI HUB</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Styling specific to the Create in 3D / Product Page */
+    .products-grid-page-main {
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 130px); /* 100vh minus header (80px) and footer (50px) */
+      box-sizing: border-box;
+      padding: 50px 40px 40px 40px; /* Balanced top padding to match live site feel */
+      justify-content: center;
+      overflow: hidden;
+      background-color: var(--bg-dark);
+    }
+
+    .products-grid-page-main .section-title {
+      font-size: 1.7rem;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 30px; /* Balanced margin-bottom */
+      margin-top: 0px;
+      letter-spacing: 0.5px;
+      color: var(--text-white);
+      text-transform: none;
+    }
+
+    .products-grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 40px 30px;
+      height: 100%;
+      max-width: 1500px;
+      margin: 0 auto;
+      width: 100%;
+      align-items: center;
+    }
+
+    .product-grid-card {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 20px;
+      box-sizing: border-box;
+      height: 100%;
+    }
+
+    .product-grid-img {
+      flex: 0 0 160px;
+      width: 160px;
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product-grid-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .placeholder-box {
+      background-color: #2b2b2b; /* Grey background as in mockup */
+      border-radius: 28px; /* Rounded corners as in mockup */
+      border: 1px solid var(--border-color);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .product-grid-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      justify-content: center;
+      height: 100%;
+    }
+
+    .product-grid-info h3 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--text-white);
+      text-transform: uppercase;
+      margin: 0;
+      letter-spacing: 0.5px;
+    }
+
+    .product-grid-info p {
+      font-size: 0.72rem; /* Very small text as in mockup to fit without scrollbar */
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 6; /* Clamp to 6 lines max to prevent pushing down the button */
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .design-now-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      padding: 8px 20px;
+      background-color: var(--primary-red);
+      color: var(--text-white);
+      border-radius: 8px;
+      font-family: var(--font-family);
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-decoration: none;
+      border: 2px solid var(--primary-red);
+      cursor: pointer;
+      transition: background-color var(--transition-speed), border-color var(--transition-speed), transform var(--transition-speed);
+      margin-top: 5px;
+    }
+
+    .design-now-btn:hover {
+      background-color: var(--primary-red-hover);
+      border-color: var(--primary-red-hover);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 1200px) {
+      .products-grid-page-main {
+        height: auto;
+        overflow-y: auto;
+        padding: 40px 20px;
+      }
+      
+      .products-grid-container {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+        gap: 30px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .products-grid-container {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      
+      .product-grid-card {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .product-grid-info {
+        align-items: center;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -32,8 +183,7 @@
       </div>
       <nav>
         <a href="index.html">HOME</a>
-        <a href="index.html#feature">FEATURE</a>
-        <a href="product.html" class="active">PRODUCT</a>
+        <a href="product.html" class="active">CREATE IN 3D</a>
         <a href="about.html">ABOUT</a>
         <a href="contact.html">CONTACT</a>
       </nav>
@@ -41,78 +191,78 @@
   </header>
 
   <!-- Product List Section -->
-  <main class="container">
+  <main class="products-grid-page-main">
     <h2 class="section-title">Choose your shape and start shaping your space.</h2>
-    
-    <div class="products-container">
+    <div class="products-grid-container">
       
       <!-- Product 1: KIKI BOX -->
-      <div class="product-card">
-        <div class="product-img-box">
+      <div class="product-grid-card">
+        <div class="product-grid-img">
           <img src="Images/box.png" alt="KIKI BOX">
         </div>
-        <div class="product-detail">
+        <div class="product-grid-info">
           <h3>KIKI BOX</h3>
-          <p>Flawless Snap-Fit, Zero Friction Out of the Box. Say goodbye to parts that are too tight to assemble or too loose to hold. KIKI HUB's advanced procedural geometry core automatically calculates the perfect mechanical tolerance required for structural connections. No matter how much you scale or resize your models, every joint, interlocking latch, and puzzle box edge will snap together seamlessly and securely on your first print minutes.</p>
-          <div class="product-downloads">
-            <a href="play.html?app=kiki-box" class="play-web-btn">PLAY IN BROWSER</a>
-          </div>
+          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim</p>
+          <a href="play.html?app=kiki-box" class="design-now-btn">DESIGN NOW</a>
         </div>
       </div>
 
       <!-- Product 2: KIKI JOINT -->
-      <div class="product-card">
-        <div class="product-img-box">
+      <div class="product-grid-card">
+        <div class="product-grid-img">
           <img src="Images/joint.png" alt="KIKI JOINT">
         </div>
-        <div class="product-detail">
+        <div class="product-grid-info">
           <h3>KIKI JOINT</h3>
-          <p>Flawless Snap-Fit, Zero Friction Out of the Box. Say goodbye to parts that are too tight to assemble or too loose to hold. KIKI HUB's advanced procedural geometry core automatically calculates the perfect mechanical tolerance required for structural connections. No matter how much you scale or resize your models, every joint, interlocking latch, and puzzle box edge will snap together seamlessly and securely on your first print minutes.</p>
-          <div class="product-downloads">
-            <a href="play.html?app=kiki-joint" class="play-web-btn">PLAY IN BROWSER</a>
-          </div>
+          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim</p>
+          <a href="play.html?app=kiki-joint" class="design-now-btn">DESIGN NOW</a>
         </div>
       </div>
 
       <!-- Product 3: KIKI FRAME -->
-      <div class="product-card">
-        <div class="product-img-box">
+      <div class="product-grid-card">
+        <div class="product-grid-img">
           <img src="Images/frame.png" alt="KIKI FRAME">
         </div>
-        <div class="product-detail">
+        <div class="product-grid-info">
           <h3>KIKI FRAME</h3>
-          <p>Flawless Snap-Fit, Zero Friction Out of the Box. Say goodbye to parts that are too tight to assemble or too loose to hold. KIKI HUB's advanced procedural geometry core automatically calculates the perfect mechanical tolerance required for structural connections. No matter how much you scale or resize your models, every joint, interlocking latch, and puzzle box edge will snap together seamlessly and securely on your first print minutes.</p>
-          <div class="product-downloads">
-            <a href="play.html?app=kiki-frame" class="play-web-btn">PLAY IN BROWSER</a>
-          </div>
+          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim</p>
+          <a href="play.html?app=kiki-frame" class="design-now-btn">DESIGN NOW</a>
         </div>
       </div>
 
       <!-- Product 4: KIKI LATTICE -->
-      <div class="product-card">
-        <div class="product-img-box">
+      <div class="product-grid-card">
+        <div class="product-grid-img">
           <img src="Images/littice.png" alt="KIKI LATTICE">
         </div>
-        <div class="product-detail">
+        <div class="product-grid-info">
           <h3>KIKI LATTICE</h3>
-          <p>Flawless Snap-Fit, Zero Friction Out of the Box. Say goodbye to parts that are too tight to assemble or too loose to hold. KIKI HUB's advanced procedural geometry core automatically calculates the perfect mechanical tolerance required for structural connections. No matter how much you scale or resize your models, every joint, interlocking latch, and puzzle box edge will snap together seamlessly and securely on your first print minutes.</p>
-          <div class="product-downloads">
-            <a href="play.html?app=kiki-lattice" class="play-web-btn">PLAY IN BROWSER</a>
-          </div>
+          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim</p>
+          <a href="play.html?app=kiki-lattice" class="design-now-btn">DESIGN NOW</a>
         </div>
       </div>
 
       <!-- Product 5: KIKI VASE -->
-      <div class="product-card">
-        <div class="product-img-box">
+      <div class="product-grid-card">
+        <div class="product-grid-img">
           <img src="Images/vase.png" alt="KIKI VASE">
         </div>
-        <div class="product-detail">
+        <div class="product-grid-info">
           <h3>KIKI VASE</h3>
-          <p>Flawless Snap-Fit, Zero Friction Out of the Box. Say goodbye to parts that are too tight to assemble or too loose to hold. KIKI HUB's advanced procedural geometry core automatically calculates the perfect mechanical tolerance required for structural connections. No matter how much you scale or resize your models, every joint, interlocking latch, and puzzle box edge will snap together seamlessly and securely on your first print minutes.</p>
-          <div class="product-downloads">
-            <a href="play.html?app=kiki-vase" class="play-web-btn">PLAY IN BROWSER</a>
-          </div>
+          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim</p>
+          <a href="play.html?app=kiki-vase" class="design-now-btn">DESIGN NOW</a>
+        </div>
+      </div>
+
+      <!-- Product 6: KIKI SHADE (Coming Soon) -->
+      <div class="product-grid-card">
+        <div class="product-grid-img placeholder-box">
+          <!-- Empty box representing coming soon -->
+        </div>
+        <div class="product-grid-info">
+          <h3>KIKI SHADE</h3>
+          <p>Comming Soon!!</p>
         </div>
       </div>
 
